@@ -26,12 +26,15 @@ body {
 .r2 span { margin-right: 7px; color: var(--muted); }
 .r2 strong { color: var(--ink); font-weight: 700; }
 
-#reset { position: absolute; right: clamp(18px, 3.5vw, 52px); bottom: clamp(18px, 3.5vw, 52px); pointer-events: auto; border: 1px solid rgba(169, 205, 238, 0.35); border-radius: 12px; padding: 15px 20px; background: rgba(10, 18, 31, 0.88); color: var(--ink); font: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background .18s, border-color .18s, transform .18s; }
-#reset:hover, #reset:focus-visible { background: #17334e; border-color: var(--line); outline: none; }
-#reset:active { transform: scale(.97); }
+.controls { position: absolute; right: clamp(18px, 3.5vw, 52px); bottom: clamp(18px, 3.5vw, 52px); display: flex; gap: 12px; pointer-events: auto; }
+.controls button { border: 1px solid rgba(169, 205, 238, 0.35); border-radius: 12px; padding: 15px 20px; background: rgba(10, 18, 31, 0.88); color: var(--ink); font: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background .18s, border-color .18s, transform .18s; }
+.controls button:hover, .controls button:focus-visible { background: #17334e; border-color: var(--line); outline: none; }
+.controls button:active { transform: scale(.97); }
 kbd { margin-left: 5px; padding: 1px 4px; border-radius: 3px; background: #273a4d; color: var(--muted); font: 0.65rem ui-monospace, monospace; }
+
+#fullscreen[hidden] { display: none; }
 
 @media (max-width: 640px) {
   .r2 { top: 18px; right: 20px; }
-  #reset { padding: 14px 18px; }
+  .controls button { padding: 14px 18px; }
 }
