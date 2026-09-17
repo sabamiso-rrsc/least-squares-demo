@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="クリックした点に最小二乗回帰直線と95%信頼区間を表示するデモ" />
+    <title>最小二乗フィッティング | Interactive Demo</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="plot" aria-label="クリックしてデータ点を追加する回帰グラフ"></canvas>
+
+    <main class="hud">
+      <output class="r2" aria-live="polite" aria-label="決定係数"><span>R²</span><strong id="r2">—</strong></output>
+
+    <button id="reset" type="button" aria-label="すべての点を消去">リセット <kbd>R</kbd></button>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
