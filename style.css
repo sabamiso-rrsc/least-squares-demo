@@ -8,7 +8,9 @@
   --band: #68d5ff;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 
 body {
   margin: 0;
@@ -19,7 +21,7 @@ body {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-#plot { display: block; width: 100vw; height: 100vh; cursor: crosshair; }
+#plot { display: block; width: 100vw; height: 100vh; cursor: crosshair; touch-action: none; }
 
 .hud { position: fixed; inset: 0; pointer-events: none; }
 .r2 { position: absolute; top: 22px; right: 26px; color: rgba(236, 244, 255, .75); font-size: .8rem; font-variant-numeric: tabular-nums; letter-spacing: .03em; text-shadow: 0 2px 12px #07101d; }
@@ -27,7 +29,7 @@ body {
 .r2 strong { color: var(--ink); font-weight: 700; }
 
 .controls { position: absolute; right: clamp(18px, 3.5vw, 52px); bottom: clamp(18px, 3.5vw, 52px); display: flex; gap: 12px; pointer-events: auto; }
-.controls button { border: 1px solid rgba(169, 205, 238, 0.35); border-radius: 12px; padding: 15px 20px; background: rgba(10, 18, 31, 0.88); color: var(--ink); font: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background .18s, border-color .18s, transform .18s; }
+.controls button { touch-action: manipulation; border: 1px solid rgba(169, 205, 238, 0.35); border-radius: 12px; padding: 15px 20px; background: rgba(10, 18, 31, 0.88); color: var(--ink); font: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background .18s, border-color .18s, transform .18s; }
 .controls button:hover, .controls button:focus-visible { background: #17334e; border-color: var(--line); outline: none; }
 .controls button:active { transform: scale(.97); }
 kbd { margin-left: 5px; padding: 1px 4px; border-radius: 3px; background: #273a4d; color: var(--muted); font: 0.65rem ui-monospace, monospace; }

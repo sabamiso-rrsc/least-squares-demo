@@ -120,7 +120,10 @@ function draw() {
   drawGrid(); const model = regression(); drawBand(model); drawModel(model); drawPoints(); updateStats(model);
 }
 
-canvas.addEventListener('click', event => {
+// pointerdown covers mouse clicks, finger taps and pen taps without the mobile click delay.
+canvas.addEventListener('pointerdown', event => {
+  if (event.button !== 0) return;
+  event.preventDefault();
   const a = plotArea();
   if (event.clientX < a.left || event.clientX > a.right || event.clientY < a.top || event.clientY > a.bottom) return;
   points.push({ x: valX(event.clientX), y: valY(event.clientY) }); draw();
