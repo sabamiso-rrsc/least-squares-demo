@@ -24,19 +24,29 @@ body {
 #plot { display: block; width: 100vw; height: 100vh; cursor: crosshair; touch-action: none; }
 
 .hud { position: fixed; inset: 0; pointer-events: none; }
-.r2 { position: absolute; top: 22px; right: 26px; color: rgba(236, 244, 255, .75); font-size: .8rem; font-variant-numeric: tabular-nums; letter-spacing: .03em; text-shadow: 0 2px 12px #07101d; }
-.r2 span { margin-right: 7px; color: var(--muted); }
-.r2 strong { color: var(--ink); font-weight: 700; }
+.hud button { pointer-events: auto; touch-action: manipulation; font: inherit; cursor: pointer; }
 
-.controls { position: absolute; right: clamp(18px, 3.5vw, 52px); bottom: clamp(18px, 3.5vw, 52px); display: flex; gap: 12px; pointer-events: auto; }
-.controls button { touch-action: manipulation; border: 1px solid rgba(169, 205, 238, 0.35); border-radius: 12px; padding: 15px 20px; background: rgba(10, 18, 31, 0.88); color: var(--ink); font: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background .18s, border-color .18s, transform .18s; }
-.controls button:hover, .controls button:focus-visible { background: #17334e; border-color: var(--line); outline: none; }
-.controls button:active { transform: scale(.97); }
-kbd { margin-left: 5px; padding: 1px 4px; border-radius: 3px; background: #273a4d; color: var(--muted); font: 0.65rem ui-monospace, monospace; }
+/* R² — the headline number, large and high-contrast. */
+.r2 { position: absolute; top: clamp(16px, 3vw, 36px); left: clamp(16px, 3vw, 36px); display: flex; align-items: baseline; gap: .35em; padding: .25em .55em .3em; border: 2px solid var(--line); border-radius: 18px; background: rgba(7, 16, 29, 0.9); box-shadow: 0 0 32px rgba(104, 213, 255, .35); font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.r2 span { color: var(--line); font-weight: 700; font-size: .6em; font-style: italic; }
+.r2 strong { color: #fff; font-weight: 800; letter-spacing: -.01em; }
 
-#fullscreen[hidden] { display: none; }
+/* Reset — big, filled, impossible to miss. */
+#reset { position: absolute; right: clamp(16px, 3.5vw, 52px); bottom: clamp(16px, 3.5vw, 52px); border: none; border-radius: 16px; padding: .7em 1.3em; background: var(--point); color: #1a1405; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; box-shadow: 0 6px 28px rgba(255, 209, 102, .45); transition: filter .15s, transform .15s; }
+#reset:hover, #reset:focus-visible { filter: brightness(1.08); outline: 3px solid #fff; outline-offset: 3px; }
+#reset:active { transform: scale(.96); }
+#reset kbd { margin-left: .4em; padding: .1em .4em; border-radius: 6px; background: rgba(26, 20, 5, .18); color: #1a1405; font: 700 .5em ui-monospace, monospace; vertical-align: middle; }
 
-@media (max-width: 640px) {
-  .r2 { top: 18px; right: 20px; }
-  .controls button { padding: 14px 18px; }
+/* Fullscreen — small, quiet icon in the corner. */
+#fullscreen { position: absolute; top: 12px; right: 12px; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: none; border-radius: 8px; background: transparent; color: var(--muted); opacity: .45; transition: opacity .15s, background .15s; }
+#fullscreen:hover, #fullscreen:focus-visible { opacity: 1; background: rgba(145, 163, 184, .15); outline: none; }
+#fullscreen svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#fullscreen .icon-exit, #fullscreen[aria-pressed="true"] .icon-enter { display: none; }
+#fullscreen[aria-pressed="true"] .icon-exit { display: block; }
+
+#fullscreen[hidden], .hint[hidden] { display: none; }
+.hint { position: absolute; top: 56px; right: 12px; width: min(340px, calc(100vw - 32px)); margin: 0; padding: 12px 16px; border: 1px solid rgba(169, 205, 238, 0.35); border-radius: 12px; background: rgba(10, 18, 31, 0.94); color: var(--ink); font-size: .9rem; line-height: 1.6; }
+
+@media (hover: none) {
+  #reset kbd { display: none; }
 }

@@ -1,7 +1,7 @@
 const canvas = document.querySelector('#plot');
 const ctx = canvas.getContext('2d');
 const ui = {
-  r2: document.querySelector('#r2'), reset: document.querySelector('#reset'), fullscreen: document.querySelector('#fullscreen'),
+  r2: document.querySelector('#r2'), reset: document.querySelector('#reset'), fullscreen: document.querySelector('#fullscreen'), fullscreenHint: document.querySelector('#fullscreen-hint'),
 };
 const points = [];
 let view = { xMin: -10, xMax: 10, yMin: -10, yMax: 10 };
@@ -140,19 +140,27 @@ function toggleFullscreen() {
 }
 function syncFullscreenButton() {
   const on = isFullscreen();
-  ui.fullscreen.firstChild.textContent = on ? '全画面を終了 ' : '全画面 ';
   ui.fullscreen.setAttribute('aria-pressed', String(on));
   ui.fullscreen.setAttribute('aria-label', on ? '全画面表示を終了' : '全画面表示');
+  ui.fullscreen.title = on ? '全画面表示を終了 (F)' : '全画面表示 (F)';
 }
-ui.fullscreen.hidden = !fullscreenSupported;
-ui.fullscreen.addEventListener('click', toggleFullscreen);
+// Launched from the home screen (iPhone standalone / installed web app) the page already fills the screen.
+const launchedFullscreen = navigator.standalone || matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches;
+let hintTimer;
+function showFullscreenHint() {
+  ui.fullscreenHint.hidden = false;
+  clearTimeout(hintTimer);
+  hintTimer = setTimeout(() => { ui.fullscreenHint.hidden = true; }, 6000);
+}
+ui.fullscreen.hidden = launchedFullscreen && !fullscreenSupported;
+ui.fullscreen.addEventListener('click', () => { if (fullscreenSupported) toggleFullscreen(); else showFullscreenHint(); });
 document.addEventListener('fullscreenchange', syncFullscreenButton);
 document.addEventListener('webkitfullscreenchange', syncFullscreenButton);
 window.addEventListener('keydown', event => {
   if (event.metaKey || event.ctrlKey || event.altKey || event.repeat) return;
   const key = event.key.toLowerCase();
   if (key === 'r') { points.length = 0; draw(); }
-  if (key === 'f' && fullscreenSupported) toggleFullscreen();
+  if (key === 'f' && !ui.fullscreen.hidden) ui.fullscreen.click();
 });
 window.addEventListener('resize', layout);
 layout();

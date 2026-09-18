@@ -2,7 +2,13 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="最小二乗法" />
+    <meta name="theme-color" content="#07101d" />
+    <link rel="manifest" href="manifest.webmanifest" />
     <meta name="description" content="クリックした点に最小二乗回帰直線と95%信頼区間を表示するデモ" />
     <title>最小二乗フィッティング | Interactive Demo</title>
     <link rel="stylesheet" href="style.css" />
@@ -13,10 +19,13 @@
     <main class="hud">
       <output class="r2" aria-live="polite" aria-label="決定係数"><span>R²</span><strong id="r2">—</strong></output>
 
-      <div class="controls">
-        <button id="fullscreen" type="button" aria-label="全画面表示" aria-pressed="false">全画面 <kbd>F</kbd></button>
-        <button id="reset" type="button" aria-label="すべての点を消去">リセット <kbd>R</kbd></button>
-      </div>
+      <button id="fullscreen" type="button" aria-label="全画面表示" aria-pressed="false" title="全画面表示 (F)">
+        <svg class="icon-enter" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" /></svg>
+        <svg class="icon-exit" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5" /></svg>
+      </button>
+      <p id="fullscreen-hint" class="hint" role="status" hidden>このブラウザでは全画面にできません。共有メニューの「ホーム画面に追加」から開くと全画面で表示できます。</p>
+
+      <button id="reset" type="button" aria-label="すべての点を消去">リセット <kbd>R</kbd></button>
     </main>
 
     <script src="script.js"></script>
